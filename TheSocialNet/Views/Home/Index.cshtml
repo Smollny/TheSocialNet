@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using TheSocialNet.Models.Users;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager;
+
+@model TheSocialNet.ViewModels.Account.MainViewModel;
+
+@{ ViewData["Title"] = "Home Page";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+@if (SignInManager.IsSignedIn(User))
+{
+    // редирект на профиль пользователя
+    Context.Response.Redirect("MyPage");
+}
+else
+{
+<div class="row">
+    <div class="side">
+        <div class="center">
+            Пользуйтесь нашей самой крутой соцсетью! Регистрируйтесь всего за 2 минуты, делитесь мыслями, находите новых друзей.
+        </div>
+        <img class="main-img" src="/Opera Снимок_2022-07-20_231612_logomaster.ai.png" />
+    </div>
+    <div class="main">
+        <partial name="Login" model="@Model.LoginView" />
+        <partial name="Register" model="@Model.RegisterView" />
+    </div>
+</div>}
